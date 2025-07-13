@@ -53,5 +53,5 @@ The Confusion Matrix was used to analyze the accuracy score achieved
 ![Confusion Matrix](assets/Confusion_Matrix.png)
 
 The Treemap chart and Donut Chart to show the proportion of the Cost Category
-![Proportions of Cost](assets/Treemap_plot.png)
+![Proportions of Cost](assets/Treemap_Plot.png)
 ![Proportions of Cost Donut Chart](assets/Donut_Chart.png)
