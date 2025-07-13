@@ -16,14 +16,14 @@ The goal of this project is to automate the tedious manual process of tracking a
 
 ## Google Sheets
 * A Google Spreadsheet file that the manager can enter the daily revenue report by cash, this will update the owner master spreadsheet as well
-  Link to view the spreadsheet:
+* Link to view the spreadsheet:
   https://docs.google.com/spreadsheets/d/1Am182YvEGj4zQu-_W7crifXzGDCoJRXNYv6J1yXh6YE/edit?usp=sharing
 
   
 ![Manager Report](assets/Manager_Daily_Report.png)
   
-* A Google Spreadsheet for the owner to calculate the Total Revenue, Total Cost and Total Profit with some automation features like:
-  Link to view the spreadsheet:
+* A Google Spreadsheet for the owner to calculate the Total Revenue, Total Cost and Total Profit with some automation features
+* Link to view the spreadsheet:
   https://docs.google.com/spreadsheets/d/1eIe75Vh8PjStPjMqQZKLVQmMiyXVaJKd3R_FGKQLFH0/edit?usp=sharing
 
       **Automatically format the number entry to Vietnamese Dong (Multiply by 1000 Dong)
