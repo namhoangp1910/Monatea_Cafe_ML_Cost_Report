@@ -2,7 +2,7 @@
 
 This project uses a machine learning model to automatically categorize daily expenses from raw text notes, aggregates financial data, and generates analytical reports and visualizations.
 
-![Final Sankey Diagram](reports/financial_flow_sankey.png)
+![Final Sankey Diagram](Graphs and Screenshot/Sankey Diagram of the Flow of Money.png)
 
 ## 🎯 Project Overview
 The goal of this project is to automate the tedious manual process of tracking and categorizing daily cafe expenses. The system takes raw, unstructured notes from a manager's spreadsheet, uses Natural Language Processing (NLP) to classify each expense, and produces a clear financial summary, saving time and reducing human error.
