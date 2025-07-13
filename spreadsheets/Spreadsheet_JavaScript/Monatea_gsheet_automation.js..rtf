@@ -1,0 +1,109 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 Menlo-Regular;}
+{\colortbl;\red255\green255\blue255;\red21\green98\blue39;\red246\green247\blue249;\red46\green49\blue51;
+\red20\green67\blue174;\red24\green25\blue27;\red186\green6\blue115;\red162\green0\blue16;\red77\green80\blue85;
+\red18\green115\blue126;}
+{\*\expandedcolortbl;;\cssrgb\c7451\c45098\c20000;\cssrgb\c97255\c97647\c98039;\cssrgb\c23529\c25098\c26275;
+\cssrgb\c9412\c35294\c73725;\cssrgb\c12549\c12941\c14118;\cssrgb\c78824\c15294\c52549;\cssrgb\c70196\c7843\c7059;\cssrgb\c37255\c38824\c40784;
+\cssrgb\c3529\c52157\c56863;}
+\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 /**\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2  * Generates dates for the CURRENT month, but only if they haven't been\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2  * generated already. It appends them after the last existing date.\cf4 \cb1 \strokec4 \
+\cf2 \cb3 \strokec2  */\cf4 \cb1 \strokec4 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \strokec5 function\cf4 \strokec4  \cf6 \strokec6 generateMonthDates\cf4 \strokec4 () \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 ui\cf4 \strokec4  = \cf7 \strokec7 SpreadsheetApp\cf4 \strokec4 .\cf6 \strokec6 getUi\cf4 \strokec4 ();\cb1 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 sheet\cf4 \strokec4  = \cf7 \strokec7 SpreadsheetApp\cf4 \strokec4 .\cf6 \strokec6 getActiveSpreadsheet\cf4 \strokec4 ().\cf6 \strokec6 getActiveSheet\cf4 \strokec4 ();\cb1 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 dateColumnValues\cf4 \strokec4  = \cf6 \strokec6 sheet\cf4 \strokec4 .\cf6 \strokec6 getRange\cf4 \strokec4 (\cf8 \strokec8 "B1:B"\cf4 \strokec4  + \cf6 \strokec6 sheet\cf4 \strokec4 .\cf6 \strokec6 getMaxRows\cf4 \strokec4 ()).\cf6 \strokec6 getValues\cf4 \strokec4 ();\cb1 \
+\
+\cb3   \cf9 \strokec9 // --- NEW: More Robust Check for Existing Month ---\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 today\cf4 \strokec4  = \cf5 \strokec5 new\cf4 \strokec4  \cf7 \strokec7 Date\cf4 \strokec4 ();\cb1 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 currentYear\cf4 \strokec4  = \cf6 \strokec6 today\cf4 \strokec4 .\cf6 \strokec6 getFullYear\cf4 \strokec4 ();\cb1 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 currentMonth\cf4 \strokec4  = \cf6 \strokec6 today\cf4 \strokec4 .\cf6 \strokec6 getMonth\cf4 \strokec4 ();\cb1 \
+\cb3   \cf5 \strokec5 let\cf4 \strokec4  \cf6 \strokec6 monthExists\cf4 \strokec4  = \cf5 \strokec5 false\cf4 \strokec4 ; \cf9 \strokec9 // A flag to track if we find the month\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf9 \strokec9 // Loop through the entire date column to see if any date from the current month exists\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 for\cf4 \strokec4  (\cf5 \strokec5 let\cf4 \strokec4  \cf6 \strokec6 i\cf4 \strokec4  = \cf10 \strokec10 0\cf4 \strokec4 ; \cf6 \strokec6 i\cf4 \strokec4  < \cf6 \strokec6 dateColumnValues\cf4 \strokec4 .\cf6 \strokec6 length\cf4 \strokec4 ; \cf6 \strokec6 i\cf4 \strokec4 ++) \{\cb1 \
+\cb3     \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 cellValue\cf4 \strokec4  = \cf6 \strokec6 dateColumnValues\cf4 \strokec4 [\cf6 \strokec6 i\cf4 \strokec4 ][\cf10 \strokec10 0\cf4 \strokec4 ];\cb1 \
+\cb3     \cf5 \strokec5 if\cf4 \strokec4  (\cf6 \strokec6 cellValue\cf4 \strokec4  \cf5 \strokec5 instanceof\cf4 \strokec4  \cf7 \strokec7 Date\cf4 \strokec4 ) \{ \cf9 \strokec9 // Check if the cell contains a valid date\cf4 \cb1 \strokec4 \
+\cb3       \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 existingDate\cf4 \strokec4  = \cf5 \strokec5 new\cf4 \strokec4  \cf7 \strokec7 Date\cf4 \strokec4 (\cf6 \strokec6 cellValue\cf4 \strokec4 );\cb1 \
+\cb3       \cf5 \strokec5 if\cf4 \strokec4  (\cf6 \strokec6 existingDate\cf4 \strokec4 .\cf6 \strokec6 getMonth\cf4 \strokec4 () === \cf6 \strokec6 currentMonth\cf4 \strokec4  && \cf6 \strokec6 existingDate\cf4 \strokec4 .\cf6 \strokec6 getFullYear\cf4 \strokec4 () === \cf6 \strokec6 currentYear\cf4 \strokec4 ) \{\cb1 \
+\cb3         \cf6 \strokec6 monthExists\cf4 \strokec4  = \cf5 \strokec5 true\cf4 \strokec4 ; \cf9 \strokec9 // Set the flag to true\cf4 \cb1 \strokec4 \
+\cb3         \cf5 \strokec5 break\cf4 \strokec4 ; \cf9 \strokec9 // Exit the loop as soon as we find a match\cf4 \cb1 \strokec4 \
+\cb3       \}\cb1 \
+\cb3     \}\cb1 \
+\cb3   \}\cb1 \
+\
+\cb3   \cf9 \strokec9 // If the flag is true, alert the user and stop the script\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 if\cf4 \strokec4  (\cf6 \strokec6 monthExists\cf4 \strokec4 ) \{\cb1 \
+\cb3     \cf6 \strokec6 ui\cf4 \strokec4 .\cf6 \strokec6 alert\cf4 \strokec4 (\cf8 \strokec8 '\uc0\u272 \'e3 t\u7891 n t\u7841 i'\cf4 \strokec4 , \cf8 \strokec8 'Ng\'e0y th\'e1ng cho th\'e1ng hi\uc0\u7879 n t\u7841 i \u273 \'e3 c\'f3 trong b\u7843 ng t\'ednh.'\cf4 \strokec4 , \cf6 \strokec6 ui\cf4 \strokec4 .\cf7 \strokec7 ButtonSet\cf4 \strokec4 .\cf7 \strokec7 OK\cf4 \strokec4 );\cb1 \
+\cb3     \cf5 \strokec5 return\cf4 \strokec4 ; \cf9 \strokec9 // Stop the script\cf4 \cb1 \strokec4 \
+\cb3   \}\cb1 \
+\
+\
+\cb3   \cf9 \strokec9 // --- Logic to find the last row (This part remains the same) ---\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 let\cf4 \strokec4  \cf6 \strokec6 lastDateRow\cf4 \strokec4  = \cf10 \strokec10 0\cf4 \strokec4 ;\cb1 \
+\cb3   \cf5 \strokec5 for\cf4 \strokec4  (\cf5 \strokec5 let\cf4 \strokec4  \cf6 \strokec6 i\cf4 \strokec4  = \cf6 \strokec6 dateColumnValues\cf4 \strokec4 .\cf6 \strokec6 length\cf4 \strokec4  - \cf10 \strokec10 1\cf4 \strokec4 ; \cf6 \strokec6 i\cf4 \strokec4  >= \cf10 \strokec10 0\cf4 \strokec4 ; \cf6 \strokec6 i\cf4 \strokec4 --) \{\cb1 \
+\cb3     \cf5 \strokec5 if\cf4 \strokec4  (\cf6 \strokec6 dateColumnValues\cf4 \strokec4 [\cf6 \strokec6 i\cf4 \strokec4 ][\cf10 \strokec10 0\cf4 \strokec4 ]) \{ \cf9 \strokec9 // Checks if the cell is not empty\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 lastDateRow\cf4 \strokec4  = \cf6 \strokec6 i\cf4 \strokec4  + \cf10 \strokec10 1\cf4 \strokec4 ;\cb1 \
+\cb3       \cf5 \strokec5 break\cf4 \strokec4 ;\cb1 \
+\cb3     \}\cb1 \
+\cb3   \}\cb1 \
+\
+\cb3   \cf9 \strokec9 // Determine where to start writing the new dates\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 let\cf4 \strokec4  \cf6 \strokec6 startRow\cf4 \strokec4  = \cf6 \strokec6 lastDateRow\cf4 \strokec4  + \cf10 \strokec10 1\cf4 \strokec4 ;\cb1 \
+\cb3   \cf5 \strokec5 if\cf4 \strokec4  (\cf6 \strokec6 startRow\cf4 \strokec4  < \cf10 \strokec10 2\cf4 \strokec4 ) \{\cb1 \
+\cb3     \cf6 \strokec6 startRow\cf4 \strokec4  = \cf10 \strokec10 2\cf4 \strokec4 ; \cf9 \strokec9 // Ensure we don't write over the header\cf4 \cb1 \strokec4 \
+\cb3   \}\cb1 \
+\
+\cb3   \cf9 \strokec9 // Get the number of days in the CURRENT month\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 daysInMonth\cf4 \strokec4  = \cf5 \strokec5 new\cf4 \strokec4  \cf7 \strokec7 Date\cf4 \strokec4 (\cf6 \strokec6 currentYear\cf4 \strokec4 , \cf6 \strokec6 currentMonth\cf4 \strokec4  + \cf10 \strokec10 1\cf4 \strokec4 , \cf10 \strokec10 0\cf4 \strokec4 ).\cf6 \strokec6 getDate\cf4 \strokec4 ();\cb1 \
+\cb3   \cf5 \strokec5 let\cf4 \strokec4  \cf6 \strokec6 currentRow\cf4 \strokec4  = \cf6 \strokec6 startRow\cf4 \strokec4 ;\cb1 \
+\
+\cb3   \cf9 \strokec9 // Loop and write the dates (This part remains the same)\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 for\cf4 \strokec4  (\cf5 \strokec5 let\cf4 \strokec4  \cf6 \strokec6 day\cf4 \strokec4  = \cf10 \strokec10 1\cf4 \strokec4 ; \cf6 \strokec6 day\cf4 \strokec4  <= \cf6 \strokec6 daysInMonth\cf4 \strokec4 ; \cf6 \strokec6 day\cf4 \strokec4 ++) \{\cb1 \
+\cb3     \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 dateToWrite\cf4 \strokec4  = \cf5 \strokec5 new\cf4 \strokec4  \cf7 \strokec7 Date\cf4 \strokec4 (\cf6 \strokec6 currentYear\cf4 \strokec4 , \cf6 \strokec6 currentMonth\cf4 \strokec4 , \cf6 \strokec6 day\cf4 \strokec4 );\cb1 \
+\cb3     \cf6 \strokec6 sheet\cf4 \strokec4 .\cf6 \strokec6 getRange\cf4 \strokec4 (\cf6 \strokec6 currentRow\cf4 \strokec4 , \cf10 \strokec10 1\cf4 \strokec4 ).\cf6 \strokec6 setValue\cf4 \strokec4 (\cf6 \strokec6 dateToWrite\cf4 \strokec4 ).\cf6 \strokec6 setNumberFormat\cf4 \strokec4 (\cf8 \strokec8 "dddd"\cf4 \strokec4 );\cb1 \
+\cb3     \cf6 \strokec6 sheet\cf4 \strokec4 .\cf6 \strokec6 getRange\cf4 \strokec4 (\cf6 \strokec6 currentRow\cf4 \strokec4 , \cf10 \strokec10 2\cf4 \strokec4 ).\cf6 \strokec6 setValue\cf4 \strokec4 (\cf6 \strokec6 dateToWrite\cf4 \strokec4 ).\cf6 \strokec6 setNumberFormat\cf4 \strokec4 (\cf8 \strokec8 "dd/mm/yy"\cf4 \strokec4 );\cb1 \
+\cb3     \cf6 \strokec6 currentRow\cf4 \strokec4 ++;\cb1 \
+\cb3   \}\cb1 \
+\cb3   \cb1 \
+\cb3   \cf6 \strokec6 ui\cf4 \strokec4 .\cf6 \strokec6 alert\cf4 \strokec4 (\cf8 \strokec8 'Th\'e0nh C\'f4ng!'\cf4 \strokec4 , \cf8 \strokec8 '\uc0\u272 \'e3 t\u7841 o ng\'e0y cho th\'e1ng hi\u7879 n t\u7841 i.'\cf4 \strokec4 , \cf6 \strokec6 ui\cf4 \strokec4 .\cf7 \strokec7 ButtonSet\cf4 \strokec4 .\cf7 \strokec7 OK\cf4 \strokec4 );\cb1 \
+\cb3 \}\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf5 \cb3 \strokec5 function\cf4 \strokec4  \cf6 \strokec6 onEdit\cf4 \strokec4 (\cf6 \strokec6 e\cf4 \strokec4 ) \{\cb1 \
+\pard\pardeftab720\partightenfactor0
+\cf4 \cb3   \cf9 \strokec9 // --- SETTINGS: Change these values to match your sheet ---\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 sheetNameToWatch\cf4 \strokec4  = \cf8 \strokec8 'B\uc0\u7843 ng B\'e1o C\'e1o Ch\'ednh'\cf4 \strokec4 ; \cf9 \strokec9 // Make sure this is an exact match\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 columnsToWatch\cf4 \strokec4  = [\cf10 \strokec10 2\cf4 \strokec4 , \cf10 \strokec10 3\cf4 \strokec4 ]; \cf9 \strokec9 // The columns you want to affect\cf4 \cb1 \strokec4 \
+\cb3   \cf9 \strokec9 // ----------------------------------------------------\cf4 \cb1 \strokec4 \
+\
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 range\cf4 \strokec4  = \cf6 \strokec6 e\cf4 \strokec4 .\cf6 \strokec6 range\cf4 \strokec4 ;\cb1 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 sheet\cf4 \strokec4  = \cf6 \strokec6 range\cf4 \strokec4 .\cf6 \strokec6 getSheet\cf4 \strokec4 ();\cb1 \
+\cb3   \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 editedColumn\cf4 \strokec4  = \cf6 \strokec6 range\cf4 \strokec4 .\cf6 \strokec6 getColumn\cf4 \strokec4 ();\cb1 \
+\cb3   \cb1 \
+\cb3   \cf9 \strokec9 // Check if the edit happened on the correct sheet and in one of the specified columns\cf4 \cb1 \strokec4 \
+\cb3   \cf5 \strokec5 if\cf4 \strokec4  (\cf6 \strokec6 sheet\cf4 \strokec4 .\cf6 \strokec6 getName\cf4 \strokec4 () === \cf6 \strokec6 sheetNameToWatch\cf4 \strokec4  && \cf6 \strokec6 columnsToWatch\cf4 \strokec4 .\cf6 \strokec6 includes\cf4 \strokec4 (\cf6 \strokec6 editedColumn\cf4 \strokec4 )) \{\cb1 \
+\cb3     \cb1 \
+\cb3     \cf9 \strokec9 // Use range.getValue() which is more reliable than e.value\cf4 \cb1 \strokec4 \
+\cb3     \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 originalValue\cf4 \strokec4  = \cf6 \strokec6 range\cf4 \strokec4 .\cf6 \strokec6 getValue\cf4 \strokec4 ();\cb1 \
+\cb3     \cb1 \
+\cb3     \cf9 \strokec9 // Check if the cell is not blank and is a valid number (even if it's text like "500")\cf4 \cb1 \strokec4 \
+\cb3     \cf5 \strokec5 if\cf4 \strokec4  (\cf6 \strokec6 originalValue\cf4 \strokec4  !== \cf8 \strokec8 ""\cf4 \strokec4  && !\cf6 \strokec6 isNaN\cf4 \strokec4 (\cf6 \strokec6 parseFloat\cf4 \strokec4 (\cf6 \strokec6 originalValue\cf4 \strokec4 ))) \{\cb1 \
+\cb3       \cb1 \
+\cb3       \cf5 \strokec5 const\cf4 \strokec4  \cf6 \strokec6 newValue\cf4 \strokec4  = \cf6 \strokec6 parseFloat\cf4 \strokec4 (\cf6 \strokec6 originalValue\cf4 \strokec4 ) * \cf10 \strokec10 1000\cf4 \strokec4 ;\cb1 \
+\cb3       \cb1 \
+\cb3       \cf9 \strokec9 // Update the cell. Using setValue() here instead of a separate variable\cf4 \cb1 \strokec4 \
+\cb3       \cf9 \strokec9 // avoids potential issues if the script runs again on its own edit.\cf4 \cb1 \strokec4 \
+\cb3       \cf6 \strokec6 range\cf4 \strokec4 .\cf6 \strokec6 setValue\cf4 \strokec4 (\cf6 \strokec6 newValue\cf4 \strokec4 ).\cf6 \strokec6 setNumberFormat\cf4 \strokec4 (\cf8 \strokec8 '#,##0" \uc0\u8363 "'\cf4 \strokec4 );\cb1 \
+\cb3     \}\cb1 \
+\cb3   \}\cb1 \
+\cb3 \}\cb1 \
+\
+}
