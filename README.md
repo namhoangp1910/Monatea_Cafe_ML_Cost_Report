@@ -14,6 +14,14 @@ The goal of this project is to automate the tedious manual process of tracking a
 * **Interactive Visualizations:** Generates Sankey diagrams and Treemaps with Plotly to visualize the flow of money.
 * **Google Sheets Integration:** Fetches raw data from and can append processed data back to Google Sheets.
 
+## Google Sheets
+* A Google Spreadsheet file that the manager can enter the daily revenue report by cash, this will update the owner master spreadsheet as well
+![Manager Report](assets/Manager_Daily_Report.png)
+* 
+* A Google Spreadsheet for the owner to calculate the Total Revenue, Total Cost and Total Profit with some automation features like:
+*     Automatically format the number entry to Vietnamese Dong (Multiply by 1000 Dong)
+*     Automatically generate the days in the current month
+![Owner Master Spreadsheet](assets/Owner_Revenue_Report.png)
 ## 🛠️ Tech Stack
 * **Python:** 3.9+
 * **Libraries:** Pandas, Scikit-learn, Joblib, Plotly, Gspread, Matplotlib
