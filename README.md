@@ -19,6 +19,7 @@ The goal of this project is to automate the tedious manual process of tracking a
 ![Manager Report](assets/Manager_Daily_Report.png)
   
 * A Google Spreadsheet for the owner to calculate the Total Revenue, Total Cost and Total Profit with some automation features like:
+  
       **Automatically format the number entry to Vietnamese Dong (Multiply by 1000 Dong)
       **Automatically generate the days in the current month
 ![Owner Master Spreadsheet](assets/Owner_Revenue_Report.png)
