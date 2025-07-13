@@ -48,3 +48,10 @@ This flowchart illustrates the complete data pipeline from raw data to final rep
 The final model achieved **87.88% accuracy** on the test set. It is highly effective at categorizing most expenses, with a known weakness in the rare "Chi phí vận hành" category due to limited data.
 
 ![Final Bar Chart](assets/Bar_Graph.png)
+
+The Confusion Matrix was used to analyze the accuracy score achieved
+![Confusion Matrix](assets/Confusion_Matrix.png)
+
+The Treemap chart and Donut Chart to show the proportion of the Cost Category
+![Proportions of Cost](assets/Treemap_plot.png)
+![Proportions of Cost](assets/Donut_Chart.png)
